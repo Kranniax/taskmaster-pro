@@ -121,6 +121,71 @@ $(".list-group").on("blur", "input[type='text']", function () {
   $(this).replaceWith(taskSpan);
 });
 
+// Using the Sortable Jquery UI method, to turn list-group items into a sortable list.
+// The activate and deactivate events trigger once for all connected lists as soon as dragging starts and stops.
+
+// The over and out events trigger when a dragged item enters or leaves a connected list.
+
+// The update event triggers when the contents of a list have changed (e.g., the items were re-ordered, an item was removed, or an item was added).
+$(".card .list-group").sortable({
+  connectWith: $(".card .list-group"),
+  scroll: false,
+  tolerance: "pointer",
+  helper: "clone",
+  activate: function (event) {
+    console.log("activate", this);
+  },
+  deactivate: function (event) {
+    console.log("deactivate", this);
+  },
+  over: function (event) {
+    console.log("over", event.target);
+  },
+  out: function (event) {
+    console.log("out", event.target);
+  },
+  update: function (event) {
+    // array to store the task data in.
+    var tempArr = [];
+
+    // loop over current set of children in sortable list
+    $(this)
+      .children()
+      .each(function () {
+        var text = $(this).find("p").text().trim();
+
+        var date = $(this).find("span").text().trim();
+
+        // add task data to the temp array as an object
+        tempArr.push({
+          text: text,
+          date: date,
+        });
+      });
+
+    // trim down list's ID to match object property.
+    var arrName = $(this).attr("id").replace("list-", "");
+
+    // update array on tasks object and save.
+    tasks[arrName] = tempArr;
+    saveTasks();
+  },
+});
+
+$("#trash").droppable({
+  accept: ".card .list-group-item",
+  tolerance: "touch",
+  drop: function (event, ui) {
+    ui.draggable.remove();
+  },
+  over: function (event, ui) {
+    console.log("over");
+  },
+  out: function (event, ui) {
+    console.log("out");
+  },
+});
+
 // modal was triggered
 $("#task-form-modal").on("show.bs.modal", function () {
   // clear values
