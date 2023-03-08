@@ -11,6 +11,9 @@ var createTask = function (taskText, taskDate, taskList) {
   // append span and p element to parent li
   taskLi.append(taskSpan, taskP);
 
+  // check due date
+  auditTask(taskLi);
+
   // append to ul list on the page
   $("#list-" + taskList).append(taskLi);
 };
@@ -128,6 +131,9 @@ $(".list-group").on("change", "input[type='text']", function () {
 
   // replace input with span element
   $(this).replaceWith(taskSpan);
+
+  // Pass task's <li> element into auditTasks() to check new due date.
+  auditTask($(taskSpan).closest(".list-group-item"));
 });
 
 // Using the Sortable Jquery UI method, to turn list-group items into a sortable list.
@@ -180,10 +186,30 @@ $(".card .list-group").sortable({
     saveTasks();
   },
 });
+
+var auditTask = function (taskEl) {
+  // get date from task element.
+  var date = $(taskEl).find("span").text().trim();
+
+  // convert to moments object at 5:00pm.(Work our normally end around 5PM/ 17:00)
+  var time = moment(date, "L").set("hour", 17);
+
+  // remove any old classes from element.
+  $(taskEl).removeClass("list-group-item-warning list-group-item-danger");
+
+  // apply new class if task is near/over due date.
+  if (moment().isAfter(time)) {
+    $(taskEl).addClass("list-group-item-danger");
+  }
+  // calculate the difference in days from current date. if < 2, add warning class.
+  else if (Math.abs(moment().diff(time, "days")) <= 2) {
+    $(taskEl).addClass("list-group-item-warning");
+  }
+};
+
 $("#modalDueDate").datepicker({
   minDate: 1,
 });
-
 // red drop area to remove list items.
 $("#trash").droppable({
   accept: ".card .list-group-item",
