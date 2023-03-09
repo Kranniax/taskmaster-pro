@@ -207,6 +207,12 @@ var auditTask = function (taskEl) {
   }
 };
 
+setInterval(function () {
+  $(".card .list-group-item").each(function (index, el) {
+    auditTask(el);
+  });
+}, 1000 * 60 * 30);
+
 $("#modalDueDate").datepicker({
   minDate: 1,
 });
