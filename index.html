@@ -23,8 +23,8 @@
     />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic.min.css"
-      integrity="sha512-LeCmts7kEi09nKc+DwGJqDV+dNQi/W8/qb0oUSsBLzTYiBwxj0KBlAow2//jV7jwEHwSCPShRN2+IWwWcn1x7Q=="
+      href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css"
+      integrity="sha512-UyNhw5RNpQaCai2EdC+Js0QL4RlVmiq41DkmCJsRV3ZxipG2L0HhTqIf/H9Hp8ez2EnFlkBnjRGJU2stW3Lj+w=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
@@ -37,19 +37,25 @@
       <header
         class="col-12 col-lg-3 bg-dark text-light sticky-top d-flex flex-column p-4 p-lg-3"
       >
-        <h1 class="text-center">Taskmaster Pro Edition</h1>
+        
+        <h1 class="text-center">
+          <span class="oi oi-task d-inline d-lg-none"></span>
+          Taskmaster Pro Edition</h1>
         <button
           id="create-task"
           class="btn btn-block btn-success"
           data-toggle="modal"
           data-target="#task-form-modal"
         >
+          <span class="oi oi-plus mr-2"></span>
           Add Task
         </button>
         <button id="remove-tasks" class="btn btn-block btn-danger">
+          <span class="oi oi-trash"></span>
           Delete All Tasks
         </button>
-        <p class="mt-auto d-none d-lg-block">
+        <span class="oi oi-task display-1 text-center mb-2 d-none d-lg-block mt-auto"></span>
+        <p class="d-none d-lg-block">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi voluptas
           architecto ipsa excepturi aut non laudantium sequi fugit officiis
           optio deleniti asperiores rem eius laborum maxime blanditiis culpa,
@@ -88,7 +94,8 @@
           </div>
         </div>
         <div id="trash" class="mt-auto">
-          <div class="w-100 bg-danger p-3 text-center text-light display-4">
+          <div class="w-100 p-3 text-center bottom-trash">
+            <span class="oi oi-trash mx-auto mb-4"></span>
             Drop Here to Remove.
           </div>
         </div>
