@@ -11,7 +11,7 @@ A Kanban task manager application which aids users in organizing their daily tas
 * HTML/CSS
 * JavaScript
 * BootStrap
-* Jquery
+* jQuery
 
 ## Deployed Website
 
