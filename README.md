@@ -15,7 +15,7 @@ A Kanban task manager application which aids users in organizing their daily tas
 
 ## Deployed Website
 
-<>
+<https://kranniax.github.io/taskmaster-pro/>
 
 ## Contributions
 
